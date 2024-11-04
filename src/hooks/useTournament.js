@@ -28,10 +28,19 @@ export const useTournament = (initialConfig = {}) => {
   };
 
   const updateMatch = (bracketType, roundIndex, matchIndex, winner) => {
-    if (!tournament) return;
+    if (!tournament) return false;
     
-    tournament.updateMatch(bracketType, roundIndex, matchIndex, winner);
+    const result = tournament.updateMatch(bracketType, roundIndex, matchIndex, winner);
     setTournament({ ...tournament });
+    return result;
+  };
+
+  const resetMatch = (bracketType, roundIndex, matchIndex) => {
+    if (!tournament) return false;
+
+    const result = tournament.resetMatch(bracketType, roundIndex, matchIndex);
+    setTournament({ ...tournament });
+    return result;
   };
 
   return {
@@ -40,6 +49,7 @@ export const useTournament = (initialConfig = {}) => {
     config,
     addParticipant,
     updateConfig,
-    updateMatch
+    updateMatch,
+    resetMatch
   };
 };

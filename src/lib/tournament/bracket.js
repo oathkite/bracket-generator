@@ -9,8 +9,17 @@ export class Bracket {
   }
 
   updateMatch(roundIndex, matchIndex, winner) {
-      const match = this.rounds[roundIndex][matchIndex];
-      if (!match) return false;
+      const round = this.rounds[roundIndex];
+      if (!round || !round[matchIndex]) return false;
+      const match = round[matchIndex];
       return match.updateResult(winner);
+  }
+
+  resetMatch(roundIndex, matchIndex) {
+    const round = this.rounds[roundIndex];
+    if (!round || !round[matchIndex]) return false;
+    const match = round[matchIndex];
+    match.resetResult();
+    return true;
   }
 }
